@@ -25,7 +25,6 @@ public class BaseTest {
     public void setUpTest(Method method) {
         test = extent.createTest(method.getName());
         driver = DriverFactory.getChrDriver();
-        driver.manage().window().maximize();
     }
 
     @AfterMethod
