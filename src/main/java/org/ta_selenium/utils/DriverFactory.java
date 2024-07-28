@@ -7,9 +7,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverFactory {
     public static WebDriver getChrDriver() {
-        WebDriverManager.chromedriver().create();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
+        //options.addArguments("--start-maximized");
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-cache");
         options.addArguments("--disable-infobars");
