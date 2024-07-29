@@ -3,12 +3,10 @@ package org.ta_selenium.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.ta_selenium.utils.WaitUtils;
+import org.ta_selenium.utils.ScrollUtils;
 
 public class LoginPage extends BasePage {
-    WaitUtils wait = new WaitUtils(driver);
-
-    @FindBy(xpath = "//span[contains(text(),\"Login\")]")
+    @FindBy(xpath = "//div[6]/descendant::span[contains(text(),\"Login\")]")
     private WebElement loginTab;
 
     @FindBy(id = "userName")
@@ -21,19 +19,23 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     @FindBy(id = "userName-value")
-    private WebElement valueUser;
+    private WebElement valueUserLabel;
+
+    @FindBy(id = "name")
+    private WebElement invalidLoginLabel;
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
     public void goToLoginBookStore(){
         driver.get("https://demoqa.com/books");
+        ScrollUtils.scrollIntoView(driver, loginTab);
         wait.waitForElementToBeClickable(loginTab);
         wait.clickAndWaitForPageLoad(loginTab);
     }
     public void clickLoginBtn(){
+        ScrollUtils.scrollIntoView(driver, loginButton);
         wait.clickAndWaitForPageLoad(loginButton);
-        wait.waitForElementToBeVisible(valueUser);
     }
     public void compileForm(String username, String password) {
         wait.waitForElementToBeVisible(usernameInput);
@@ -41,7 +43,15 @@ public class LoginPage extends BasePage {
         usernameInput.sendKeys(username);
         passwordInput.sendKeys(password);
     }
-    public String getActualUrl(){
-        return  driver.getCurrentUrl();
+    public Boolean isValueUserLabelDisplayed(){
+        wait.waitForElementToBeVisible(valueUserLabel);
+        return valueUserLabel.isDisplayed();
+    }
+    public String getActualUserName(){
+        return valueUserLabel.getText();
+    }
+    public Boolean isInvalidLoginLabelDisplayed(){
+        wait.waitForElementToBeVisible(invalidLoginLabel);
+        return invalidLoginLabel.isDisplayed();
     }
 }
