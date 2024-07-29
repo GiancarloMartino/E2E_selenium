@@ -36,4 +36,7 @@ public class WaitUtils {
     public void waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+    public void waitForSpecifiedUrl(String url){
+        wait.until(ExpectedConditions.urlToBe(url));
+    }
 }

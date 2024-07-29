@@ -7,7 +7,11 @@ public class ExtentReportManager {
     private static final ExtentReports extentReports = new ExtentReports();
     private static boolean isInitialized = false;
 
-    public synchronized static ExtentReports getExtentReports() {
+    private ExtentReportManager(){
+        //for this use case this constructor can be empty
+    }
+
+    public static synchronized ExtentReports getExtentReports() {
         if (!isInitialized) {
             initializeExtentReports();
         }

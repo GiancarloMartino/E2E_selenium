@@ -5,6 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverFactory {
+    private DriverFactory(){
+        //for this use case this constructor can be empty
+    }
     public static WebDriver getChrDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
