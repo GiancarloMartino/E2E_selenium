@@ -39,4 +39,9 @@ public class WaitUtils {
     public void waitForSpecifiedUrl(String url){
         wait.until(ExpectedConditions.urlToBe(url));
     }
+    public void clickOnAlert(){
+        //Wait for the alert to be displayed and store it in a variable
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
+    }
 }

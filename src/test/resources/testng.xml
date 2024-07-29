@@ -4,7 +4,7 @@
     <test name="Regression Test">
         <classes>
             <class name="org.ta_selenium.tests.LoginTest"/>
-            <class name="org.ta_selenium.tests.BooksAddedTest"/>
+            <class name="org.ta_selenium.tests.ProfileTest"/>
         </classes>
     </test>
 </suite>
