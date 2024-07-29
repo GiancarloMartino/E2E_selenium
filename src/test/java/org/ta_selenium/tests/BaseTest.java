@@ -17,7 +17,7 @@ public class BaseTest {
     protected ExtentTest test;
     protected ApiController apiController;
 
-    @BeforeSuite
+    @BeforeClass
     public void setUp() {
         extent = ExtentReportManager.getExtentReports();
     }
