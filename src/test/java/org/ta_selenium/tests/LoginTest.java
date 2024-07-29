@@ -12,6 +12,7 @@ public class LoginTest extends BaseTest {
         test.info("Go To DemoQa Books");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
+        Assert.assertTrue(loginPage.isUserFormDisplayed());
         test.info("Can go to login form");
         loginPage.compileForm("TestAutomation", "*Ta_Java0");
         test.info("Can compile the login form");
@@ -39,7 +40,6 @@ public class LoginTest extends BaseTest {
     @Test(groups = {"login"})
     public void testIsPossibleToLogout(){
         test.info("Go To DemoQa Books and Logout");
-        String expectedUrl = "https://demoqa.com/profile";
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
         test.info("Can go to login form");
@@ -51,11 +51,14 @@ public class LoginTest extends BaseTest {
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.clickProfileTab();
         test.info("Click on Profile Tab");
-        Assert.assertTrue(profilePage.isNoRowsLabelDisplayed());
-        test.info("No Rows Label is Displayed in Profile");
-        String actualUrl = profilePage.getActualUrl();
-        Assert.assertEquals(actualUrl, expectedUrl);
-        test.info("Expected Profile Url is correctly display");
+        Assert.assertTrue(profilePage.isLogOutBtnDisplayed());
+        test.info("LogOut Button is displayed");
+        profilePage.clickLogOutBtn();
+        test.info("LogOut Button has clicked");
+        Assert.assertTrue(loginPage.isUserFormDisplayed());
+        String actualUrl = loginPage.getActualUrl();
+        Assert.assertEquals(actualUrl, "https://demoqa.com/login");
+        test.info("User is on Login page");
         test.pass("SuccessfullLogout");
     }
 }

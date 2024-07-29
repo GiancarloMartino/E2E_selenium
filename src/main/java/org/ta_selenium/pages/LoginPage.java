@@ -9,6 +9,9 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[6]/descendant::span[contains(text(),\"Login\")]")
     private WebElement loginTab;
 
+    @FindBy(id = "userForm")
+    private WebElement userForm;
+
     @FindBy(id = "userName")
     private WebElement usernameInput;
 
@@ -32,6 +35,7 @@ public class LoginPage extends BasePage {
         ScrollUtils.scrollIntoView(driver, loginTab);
         wait.waitForElementToBeClickable(loginTab);
         wait.clickAndWaitForPageLoad(loginTab);
+        wait.waitForElementToBeVisible(userForm);
     }
     public void clickLoginBtn(){
         ScrollUtils.scrollIntoView(driver, loginButton);
@@ -47,6 +51,11 @@ public class LoginPage extends BasePage {
         wait.waitForElementToBeVisible(valueUserLabel);
         return valueUserLabel.isDisplayed();
     }
+    public Boolean isUserFormDisplayed(){
+        wait.waitForElementToBeVisible(userForm);
+        return userForm.isDisplayed();
+    }
+
     public String getActualUserName(){
         return valueUserLabel.getText();
     }

@@ -34,4 +34,12 @@ public class ProfilePage extends BasePage{
         wait.waitForElementToBeVisible(noRowsLabel);
         return noRowsLabel.isDisplayed();
     }
+    public Boolean isLogOutBtnDisplayed(){
+        wait.waitForElementToBeVisible(logoutBtn);
+        return logoutBtn.isDisplayed();
+    }
+    public void clickLogOutBtn(){
+        ScrollUtils.scrollIntoView(driver, logoutBtn);
+        logoutBtn.click();
+    }
 }
