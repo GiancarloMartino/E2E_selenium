@@ -9,56 +9,56 @@ public class LoginTest extends BaseTest {
 
     @Test(groups = {"login"})
     public void testSuccessfulLogin() {
-        test.info("Go To DemoQa Books");
+        test.info("Navigating to DemoQa Books");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
         Assert.assertTrue(loginPage.isUserFormDisplayed());
-        test.info("Can go to login form");
+        test.info("Login form is displayed");
         loginPage.compileForm("TestAutomation", "*Ta_Java0");
-        test.info("Can compile the login form");
+        test.info("Filled the login form");
         loginPage.clickLoginBtn();
         Assert.assertTrue(loginPage.isValueUserLabelDisplayed());
-        test.info("Can click on login button");
+        test.info("Login button clicked");
         String userName = loginPage.getActualUserName();
         Assert.assertEquals(userName, "TestAutomation", "There is a problem with userName");
-        test.info("After Login Username is correctly displayed in account label");
-        test.pass("SuccessfulLogin");
+        test.info("Username is correctly displayed after login");
+        test.pass("Successful login");
     }
     @Test(groups = {"login"})
     public void testUnsuccessfulLogin(){
-        test.info("Go To DemoQa Books with invalid credetials");
+        test.info("Navigating to DemoQa Books with invalid credentials");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
-        test.info("Can go to login form");
+        test.info("Login form is displayed");
         loginPage.compileForm("TestAutomation", "Ta_Java");
-        test.info("Can compile the login form");
+        test.info("Filled the login form with invalid credentials");
         loginPage.clickLoginBtn();
         Assert.assertTrue(loginPage.isInvalidLoginLabelDisplayed());
         test.info("Invalid Login Label is correctly displayed");
-        test.pass("UnSuccessfulLogin");
+        test.pass("UnSuccessful Login");
     }
     @Test(groups = {"login"})
-    public void testIsPossibleToLogout(){
-        test.info("Go To DemoQa Books and Logout");
+    public void testLogout(){
+        test.info("Navigating to DemoQa Books and logging out");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
-        test.info("Can go to login form");
+        test.info("Login form is displayed");
         loginPage.compileForm("TestAutomation", "*Ta_Java0");
-        test.info("Can compile the login form");
+        test.info("Filled the login form");
         loginPage.clickLoginBtn();
         Assert.assertTrue(loginPage.isValueUserLabelDisplayed());
-        test.info("After Login Username is correctly displayed in account label");
+        test.info("Username is correctly displayed after login");
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.clickProfileTab();
-        test.info("Click on Profile Tab");
+        test.info("Clicked on Profile Tab");
         Assert.assertTrue(profilePage.isLogOutBtnDisplayed());
-        test.info("LogOut Button is displayed");
+        test.info("Logout button is displayed");
         profilePage.clickLogOutBtn();
-        test.info("LogOut Button has clicked");
+        test.info("Clicked on logout button");
         Assert.assertTrue(loginPage.isUserFormDisplayed());
         String actualUrl = loginPage.getActualUrl();
         Assert.assertEquals(actualUrl, "https://demoqa.com/login");
-        test.info("User is on Login page");
-        test.pass("SuccessfullLogout");
+        test.info("User is redirected to the login page");
+        test.pass("Successfull Logout");
     }
 }

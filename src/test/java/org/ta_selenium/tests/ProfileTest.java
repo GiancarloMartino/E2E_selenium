@@ -9,96 +9,96 @@ public class ProfileTest extends BaseTest  {
 
     @Test(groups = {"login"})
     public void testNobooksInProfileSection(){
-        test.info("Go To DemoQa Books and Logout");
+        test.info("Navigating to DemoQa Books and logging out");
         String expectedUrl = "https://demoqa.com/profile";
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
-        test.info("Can go to login form");
+        test.info("Navigated to login form");
         loginPage.compileForm("TestAutomation", "*Ta_Java0");
-        test.info("Can compile the login form");
+        test.info("Filled the login form");
         loginPage.clickLoginBtn();
         Assert.assertTrue(loginPage.isValueUserLabelDisplayed());
-        test.info("After Login Username is correctly displayed in account label");
+        test.info("Username is displayed correctly after login");
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.clickProfileTab();
-        test.info("Click on Profile Tab");
+        test.info("Clicked on Profile Tab");
         Assert.assertTrue(profilePage.isNoRowsLabelDisplayed());
-        test.info("No Rows Label is Displayed in Profile: No books associated to the user");
+        test.info("No Rows Label is displayed in Profile: No books associated with the user");
         String actualUrl = profilePage.getActualUrl();
         Assert.assertEquals(actualUrl, expectedUrl);
-        test.info("Expected Profile Url is correctly display");
-        test.pass("SuccessfullLogout");
+        test.info("Expected Profile URL is displayed correctly");
+        test.pass("Successful Check on Profile Tab");
     }
 
     @Test(groups = {"api"})
     public void testExpectedBooksInProfileSection(){
-        test.info("Go To DemoQa Books and Logout");
+        test.info("Navigating to DemoQa Books and logging out");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
-        test.info("Can go to login form");
+        test.info("Navigated to login form");
         loginPage.compileForm("TestAutomation", "*Ta_Java0");
-        test.info("Can compile the login form");
+        test.info("Filled the login form");
         loginPage.clickLoginBtn();
         Assert.assertTrue(loginPage.isValueUserLabelDisplayed());
-        test.info("After Login Username is correctly displayed in account label");
+        test.info("Username is displayed correctly after login");
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.clickProfileTab();
-        test.info("Click on Profile Tab");
+        test.info("Clicked on Profile Tab");
         profilePage.centralizeBooksTable();
         List<String> expectedBookTitles = List.of("Git Pocket Guide", "Programming JavaScript Applications", "You Don't Know JS");
         List<String> actualBookTitles = profilePage.getAllBookTitles();
-        test.info(" Get All Titles Displayed");
+        test.info("Retrieved all displayed titles");
         Assert.assertEquals(actualBookTitles, expectedBookTitles, "The book titles DO NOT match the expected list");
         test.info("The books titles match the expected List");
-        test.pass("The texts associated with the user are correctly displayed in the table.");
+        test.pass("The books associated with the user are displayed correctly in the table");
     }
 
     @Test(groups = {"api"})
     public void testIsPossibleDeleteOneRandomBookFromUI(){
-        test.info("Go To DemoQa Books and Logout");
+        test.info("Navigating to DemoQa Books and logging out");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
-        test.info("Can go to login form");
+        test.info("Navigated to login form");
         loginPage.compileForm("TestAutomation", "*Ta_Java0");
-        test.info("Can compile the login form");
+        test.info("Filled the login form");
         loginPage.clickLoginBtn();
         Assert.assertTrue(loginPage.isValueUserLabelDisplayed());
-        test.info("After Login Username is correctly displayed in account label");
+        test.info("Username is displayed correctly after login");
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.clickProfileTab();
-        test.info("Click on Profile Tab");
+        test.info("Clicked on Profile Tab");
         String booksDeleted = profilePage.deleteRandomBook();
-        test.info("Select a random title and remove it from UI");
+        test.info("Selected a random title and removed it from UI");
         List<String> actualBookTitles = profilePage.getAllBookTitles();
         Assert.assertFalse(actualBookTitles.contains(booksDeleted));
-        test.info("Expected list after delete is displayed");
-        test.pass("Successfull Random Title Delete");
+        test.info("Expected list after deletion is displayed");
+        test.pass("Successfully deleted a random book title");
     }
 
     @Test(groups = {"api"})
     public void testIsPossibleDeleteAllBooksFromUI(){
-        test.info("Go To DemoQa Books and Logout");
+        test.info("Navigating to DemoQa Books and logging out");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginBookStore();
-        test.info("Can go to login form");
+        test.info("Navigated to login form");
         loginPage.compileForm("TestAutomation", "*Ta_Java0");
-        test.info("Can compile the login form");
+        test.info("Filled the login form");
         loginPage.clickLoginBtn();
         Assert.assertTrue(loginPage.isValueUserLabelDisplayed());
-        test.info("After Login Username is correctly displayed in account label");
+        test.info("Username is displayed correctly after login");
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.clickProfileTab();
-        test.info("Click on Profile Tab");
+        test.info("Clicked on Profile Tab");
         profilePage.centralizeBooksTable();
         profilePage.deleteAllBooksInUserProfile();
-        test.info("Click on Delete All Books Button");
+        test.info("Clicked on Delete All Books button");
         Assert.assertTrue(profilePage.isDeleteModalDisplayed());
         profilePage.confirmDeleteInModal();
-        test.info("click Ok on delete confirmation");
+        test.info("Confirmed deletion in modal");
         profilePage.acceptAlert();
-        test.info("Accept Alert");
+        test.info("Accepted alert");
         Assert.assertTrue(profilePage.isNoRowsLabelDisplayed());
-        test.info("No Rows Label is Displayed in Profile: No books associated to the user");
-        test.pass("The texts associated with the user are correctly removed from the table.");
+        test.info("No Rows Label is displayed in Profile: No books associated with the user");
+        test.pass("Successfully removed all books associated with the user from the table");
     }
 }
