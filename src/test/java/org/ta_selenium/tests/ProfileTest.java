@@ -67,7 +67,12 @@ public class ProfileTest extends BaseTest  {
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.clickProfileTab();
         test.info("Click on Profile Tab");
-        test.pass("ciao");
+        String booksDeleted = profilePage.deleteRandomBook();
+        test.info("Select a random title and remove it from UI");
+        List<String> actualBookTitles = profilePage.getAllBookTitles();
+        Assert.assertFalse(actualBookTitles.contains(booksDeleted));
+        test.info("Expected list after delete is displayed");
+        test.pass("Successfull Random Title Delete");
     }
 
     @Test(groups = {"api"})

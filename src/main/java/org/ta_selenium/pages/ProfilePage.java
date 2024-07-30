@@ -5,10 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import org.ta_selenium.utils.ScrollUtils;
-import org.ta_selenium.utils.WaitUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ProfilePage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/descendant::span[@class=\"-pageInfo\"]")
@@ -83,5 +83,28 @@ public class ProfilePage extends BasePage{
 
     public void acceptAlert(){
         wait.clickOnAlert();
+    }
+
+    public String deleteRandomBook() {
+        int randomPosition = ThreadLocalRandom.current().nextInt(1, 4);
+        String bookTitle = getRandomBookTitle(randomPosition);
+        System.out.println("Titolo del libro selezionato: " + bookTitle);
+        deleteRandomBook(randomPosition);
+        confirmDeleteInModal();
+        acceptAlert();
+        return bookTitle;
+    }
+
+    public String getRandomBookTitle(int randomPosition) {
+        String titleXPath = String.format("//div[@class='rt-tr-group'][%d]/descendant::a", randomPosition);
+        WebElement titleElement = driver.findElement(By.xpath(titleXPath));
+        return titleElement.getText();
+    }
+
+    public void deleteRandomBook(int randomPosition) {
+        String clickXPath = String.format("//div[@class='rt-tr-group'][%d]/descendant::span[@title=\"Delete\"]", randomPosition);
+        WebElement clickElement = driver.findElement(By.xpath(clickXPath));
+        ScrollUtils.scrollIntoView(driver, clickElement);
+        clickElement.click();
     }
 }
